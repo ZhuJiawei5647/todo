@@ -19,6 +19,9 @@
       @toggle="toggleFilter"
       @clearAllCompleted="clearAllCompleted"
     />
+    <button @click="notify">notify</button>
+    <!-- <router-view></router-view> -->
+    <!-- <notification message="你好啊"></notification> -->
   </section>
 </template>
 
@@ -27,7 +30,20 @@ import Item from './item.vue'
 import Tabs from './tabs.vue'
 let id = 0
 export default {
-  data() {
+  beforeRouteEnter (to, from, next) {
+    console.log('todo before route enter')
+    next()
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('todo before route update')
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log('todo before route leave')
+    next()
+  },
+  props: ['id'],
+  data () {
     return {
       todos: [],
       filter: 'all'
@@ -35,10 +51,10 @@ export default {
   },
   components: {
     Item,
-    Tabs,
+    Tabs
   },
   computed: {
-    filteredTodos() {
+    filteredTodos () {
       if (this.filter === 'all') {
         return this.todos
       }
@@ -47,7 +63,7 @@ export default {
     }
   },
   methods: {
-    addTodo(e) {
+    addTodo (e) {
       this.todos.unshift({
         id: id++,
         content: e.target.value.trim(),
@@ -55,14 +71,17 @@ export default {
       })
       e.target.value = ''
     },
-    deleteTodo(id) {
+    deleteTodo (id) {
       this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
     },
-    toggleFilter(state) {
+    toggleFilter (state) {
       this.filter = state
     },
-    clearAllCompleted() {
+    clearAllCompleted () {
       this.todos = this.todos.filter(todo => !todo.completed)
+    },
+    notify () {
+      this.$notify('你好吗')
     }
   }
 }
@@ -95,5 +114,3 @@ export default {
   box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
 }
 </style>
-
-

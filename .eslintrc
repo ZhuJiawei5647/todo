@@ -1,0 +1,17 @@
+{
+  "plugins": [
+    "vue"
+  ],
+  "extends": [
+    "plugin:vue/base",
+    "standard"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-new": "off"
+  }
+}

@@ -1,0 +1,2 @@
+// import './databinding'
+import './component'
